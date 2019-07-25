@@ -13,5 +13,10 @@
             "Chunhei2008\\Hyperf\\Validation\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "psr/container": "^1.0",
+        "hyperf/utils": "~1.0.0",
+        "hyperf/contract": "~1.0.0",
+        "chunhei2008/hyperf-translation":"*"
+    }
 }
