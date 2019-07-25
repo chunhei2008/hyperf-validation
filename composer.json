@@ -1,0 +1,17 @@
+{
+    "name": "chunhei2008/hyperf-validation",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wangyi",
+            "email": "chunhei2008@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Chunhei2008\\Hyperf\\Validation\\": "src/"
+        }
+    },
+    "require": {}
+}
