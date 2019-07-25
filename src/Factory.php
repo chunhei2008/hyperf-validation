@@ -4,9 +4,9 @@ namespace Chunhei2008\Hyperf\Validation;
 
 use Closure;
 use Hyperf\Utils\Str;
-//use Chunhei2008\Hyperf\Contracts\Container\Container;   // todo
+//use Chunhei2008\Hyperf\Validation\Contracts\Container\Container;   // todo
 use Chunhei2008\Hyperf\Translation\Contracts\Translator;
-use Chunhei2008\Hyperf\Validation\Contracts\Factory as FactoryContract;
+use Chunhei2008\Hyperf\Validation\Contracts\Validation\Factory as FactoryContract;
 
 class Factory implements FactoryContract
 {
@@ -27,7 +27,7 @@ class Factory implements FactoryContract
 //    /**
 //     * The IoC container instance.
 //     *
-//     * @var \Chunhei2008\Hyperf\Contracts\Container\Container
+//     * @var \Chunhei2008\Hyperf\Validation\Contracts\Container\Container
 //     */
 //    protected $container;
 
@@ -77,7 +77,7 @@ class Factory implements FactoryContract
      * Create a new Validator factory instance.
      *
      * @param  \Chunhei2008\Hyperf\Translation\Contracts\Translator  $translator
-     * @param  \Chunhei2008\Hyperf\Contracts\Container\Container|null  $container
+     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Container\Container|null  $container
      * @return void
      */
     public function __construct(Translator $translator)

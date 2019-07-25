@@ -2,7 +2,7 @@
 
 namespace Chunhei2008\Hyperf\Validation;
 
-use Chunhei2008\Hyperf\Validation\Contracts\Rule as RuleContract;
+use Chunhei2008\Hyperf\Validation\Contracts\Validation\Rule as RuleContract;
 
 class ClosureValidationRule implements RuleContract
 {

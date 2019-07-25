@@ -16,8 +16,8 @@ use Hyperf\Utils\Str;
 use JsonSerializable;
 use Hyperf\Utils\Contracts\Jsonable;
 use Hyperf\Utils\Contracts\Arrayable;
-use App\Validation\Contracts\Support\MessageProvider;
-use App\Validation\Contracts\Support\MessageBag as MessageBagContract;
+use Chunhei2008\Hyperf\Validation\Contracts\Support\MessageProvider;
+use Chunhei2008\Hyperf\Validation\Contracts\Support\MessageBag as MessageBagContract;
 
 class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, MessageBagContract, MessageProvider
 {
@@ -376,7 +376,7 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->getMessages();
     }
@@ -407,7 +407,7 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJson();
     }

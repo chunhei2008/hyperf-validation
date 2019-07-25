@@ -11,7 +11,7 @@ class ValidationException extends Exception
     /**
      * The validator instance.
      *
-     * @var \Chunhei2008\Hyperf\Validation\Contracts\Validator
+     * @var \Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator
      */
     public $validator;
 
@@ -46,7 +46,7 @@ class ValidationException extends Exception
     /**
      * Create a new exception instance.
      *
-     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Validator  $validator
+     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator  $validator
      * @param  \Symfony\Component\HttpFoundation\Response|null  $response
      * @param  string  $errorBag
      * @return void

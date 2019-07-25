@@ -1,6 +1,6 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Contracts;
+namespace Chunhei2008\Hyperf\Validation\Contracts\Validation;
 
 interface Factory
 {
@@ -11,7 +11,7 @@ interface Factory
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $customAttributes
-     * @return \Chunhei2008\Hyperf\Validation\Contracts\Validator
+     * @return \Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator
      */
     public function make(array $data, array $rules, array $messages = [], array $customAttributes = []);
 

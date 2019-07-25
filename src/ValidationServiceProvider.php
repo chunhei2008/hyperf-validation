@@ -3,7 +3,7 @@
 namespace Chunhei2008\Hyperf\Validation;
 
 use Chunhei2008\Hyperf\Support\ServiceProvider;
-use Chunhei2008\Hyperf\Contracts\Support\DeferrableProvider;
+use Chunhei2008\Hyperf\Validation\Contracts\Support\DeferrableProvider;
 
 class ValidationServiceProvider extends ServiceProvider implements DeferrableProvider
 {

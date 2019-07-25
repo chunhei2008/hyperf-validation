@@ -1,6 +1,7 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Contracts;
+namespace Chunhei2008\Hyperf\Validation\Contracts\Validation;
+
 
 use Chunhei2008\Hyperf\Validation\Contracts\Support\MessageProvider;
 

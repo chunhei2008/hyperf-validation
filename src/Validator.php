@@ -10,12 +10,12 @@ use Hyperf\Utils\Arr;
 use Hyperf\Utils\Str;
 use Hyperf\Utils\Fluent;
 
-//use Chunhei2008\Hyperf\Contracts\Container\Container;
+//use Chunhei2008\Hyperf\Validation\Contracts\Container\Container;
 use Chunhei2008\Hyperf\Translation\Contracts\Translator;
-use Chunhei2008\Hyperf\Validation\Contracts\ImplicitRule;
+use Chunhei2008\Hyperf\Validation\Contracts\Validation\ImplicitRule;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Chunhei2008\Hyperf\Validation\Contracts\Rule as RuleContract;
-use Chunhei2008\Hyperf\Validation\Contracts\Validator as ValidatorContract;
+use Chunhei2008\Hyperf\Validation\Contracts\Validation\Rule as RuleContract;
+use Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator as ValidatorContract;
 
 class Validator implements ValidatorContract
 {
@@ -32,7 +32,7 @@ class Validator implements ValidatorContract
 //    /**
 //     * The container instance.
 //     *
-//     * @var \Chunhei2008\Hyperf\Contracts\Container\Container
+//     * @var \Chunhei2008\Hyperf\Validation\Contracts\Container\Container
 //     */
 //    protected $container;
 
@@ -566,7 +566,7 @@ class Validator implements ValidatorContract
      *
      * @param  string                                    $attribute
      * @param  mixed                                     $value
-     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Rule $rule
+     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Validation\Rule $rule
      * @return void
      */
     protected function validateUsingCustomRule($attribute, $value, $rule)
@@ -1135,7 +1135,7 @@ class Validator implements ValidatorContract
 //    /**
 //     * Set the IoC container instance.
 //     *
-//     * @param  \Chunhei2008\Hyperf\Contracts\Container\Container  $container
+//     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Container\Container  $container
 //     * @return void
 //     */
 //    public function setContainer(Container $container)

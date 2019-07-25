@@ -7,7 +7,7 @@ use Hyperf\Utils\Arr;
 use Hyperf\Utils\Str;
 use Chunhei2008\Hyperf\Validation\Rules\Exists;
 use Chunhei2008\Hyperf\Validation\Rules\Unique;
-use Chunhei2008\Hyperf\Validation\Contracts\Rule as RuleContract;
+use Chunhei2008\Hyperf\Validation\Contracts\Validation\Rule as RuleContract;
 
 class ValidationRuleParser
 {

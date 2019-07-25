@@ -35,7 +35,7 @@ class Rule
     /**
      * Get an in constraint builder instance.
      *
-     * @param  \Chunhei2008\Hyperf\Contracts\Arrayable|array|string  $values
+     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Arrayable|array|string  $values
      * @return \Chunhei2008\Hyperf\Validation\Rules\In
      */
     public static function in($values)
@@ -50,7 +50,7 @@ class Rule
     /**
      * Get a not_in constraint builder instance.
      *
-     * @param  \Chunhei2008\Hyperf\Contracts\Support\Arrayable|array|string  $values
+     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Support\Arrayable|array|string  $values
      * @return \Chunhei2008\Hyperf\Validation\Rules\NotIn
      */
     public static function notIn($values)

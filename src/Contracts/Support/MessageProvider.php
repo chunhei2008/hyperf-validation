@@ -11,12 +11,14 @@
 namespace Chunhei2008\Hyperf\Validation\Contracts\Support;
 
 
+use Chunhei2008\Hyperf\Validation\Contracts\Support\MessageBag;
+
 interface MessageProvider
 {
     /**
      * Get the messages for the instance.
      *
-     * @return \Illuminate\Contracts\Support\MessageBag
+     * @return MessageBag
      */
     public function getMessageBag();
 }
