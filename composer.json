@@ -20,15 +20,17 @@
     "require": {
         "php": ">=7.2",
         "ext-swoole": ">=4.3",
-        "hyperf/utils": "1.0.*",
-        "hyperf/framework": "1.0.*",
+        "chunhei2008/hyperf-translation": "dev-master",
+        "egulias/email-validator": "^2.1",
+        "hyperf/command": "^1.0",
+        "hyperf/devtool": "^1.0",
         "hyperf/di": "1.0.*",
+        "hyperf/framework": "1.0.*",
+        "hyperf/utils": "1.0.*",
         "nesbot/carbon": "^2.21",
-        "symfony/http-foundation":"^4.3",
-        "egulias/email-validator":"^2.1",
-        "psr/http-message":"^1.0",
-        "psr/container":"^1.0",
-        "chunhei2008/hyperf-translation": "dev-master"
+        "psr/container": "^1.0",
+        "psr/http-message": "^1.0",
+        "symfony/http-foundation": "^4.3"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
