@@ -1,10 +1,4 @@
-.buildpath
-.settings/
-.project
-*.patch
-.idea/
-.git/
-.phpintel/
-.DS_Store
-*.lock
-.phpunit*
+/vendor/
+composer.lock
+*.cache
+*.log
