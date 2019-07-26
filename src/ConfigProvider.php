@@ -12,30 +12,25 @@ declare(strict_types=1);
 
 namespace Chunhei2008\Hyperf\Validation;
 
+
+use Chunhei2008\Hyperf\Validation\HttpServer\ServerFactory;
+
 class ConfigProvider
 {
     public function __invoke(): array
     {
         return [
             'dependencies' => [
-                ClientInterface::class => Client::class,
-
-
-
+                \Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator::class => \Chunhei2008\Hyperf\Validation\ValidatorFactory::class,
+                \Chunhei2008\Hyperf\Validation\PresenceVerifierInterface::class      => \Chunhei2008\Hyperf\Validation\DatabasePresenceVerifierFactory::class,
+                \Chunhei2008\Hyperf\Validation\Contracts\Validation\Factory::class   => \Chunhei2008\Hyperf\Validation\ValidatorFactory::class,
+                \Hyperf\HttpServer\Server::class                                     => ServerFactory::class,
             ],
-            'scan' => [
+            'scan'         => [
                 'paths' => [
                     __DIR__,
                 ],
             ],
-//            'publish' => [
-//                [
-//                    'id' => 'config',
-//                    'description' => 'The config for aliyun acm.',
-//                    'source' => __DIR__ . '/../publish/aliyun_acm.php',
-//                    'destination' => BASE_PATH . '/config/autoload/aliyun_acm.php',
-//                ],
-//            ],
         ];
     }
 }
