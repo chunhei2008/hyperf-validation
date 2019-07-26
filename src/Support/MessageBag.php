@@ -93,7 +93,7 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
     /**
      * Merge a new array of messages into the message bag.
      *
-     * @param  \Illuminate\Contracts\Support\MessageProvider|array $messages
+     * @param  MessageProvider|array $messages
      * @return $this
      */
     public function merge($messages)
@@ -301,7 +301,7 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
     /**
      * Get the messages for the instance.
      *
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function getMessageBag()
     {
@@ -322,7 +322,7 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
      * Set the default message format.
      *
      * @param  string $format
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function setFormat($format = ':message')
     {

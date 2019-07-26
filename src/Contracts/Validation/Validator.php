@@ -4,6 +4,7 @@ namespace Chunhei2008\Hyperf\Validation\Contracts\Validation;
 
 
 use Chunhei2008\Hyperf\Validation\Contracts\Support\MessageProvider;
+use Chunhei2008\Hyperf\Validation\Support\MessageBag;
 
 interface Validator extends MessageProvider
 {
@@ -56,7 +57,7 @@ interface Validator extends MessageProvider
     /**
      * Get all of the validation error messages.
      *
-     * @return \Illuminate\Support\MessageBag
+     * @return MessageBag
      */
     public function errors();
 }
