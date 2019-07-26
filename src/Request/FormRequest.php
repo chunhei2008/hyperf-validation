@@ -86,6 +86,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
     public function __construct(ContainerInterface $container)
     {
         $this->setContainer($container);
+        $this->validateResolved();
     }
 
     /**

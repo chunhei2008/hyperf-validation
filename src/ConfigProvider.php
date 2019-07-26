@@ -13,8 +13,6 @@ declare(strict_types=1);
 namespace Chunhei2008\Hyperf\Validation;
 
 
-use Chunhei2008\Hyperf\Validation\HttpServer\ServerFactory;
-
 class ConfigProvider
 {
     public function __invoke(): array
@@ -24,7 +22,6 @@ class ConfigProvider
                 \Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator::class => \Chunhei2008\Hyperf\Validation\ValidatorFactory::class,
                 \Chunhei2008\Hyperf\Validation\PresenceVerifierInterface::class      => \Chunhei2008\Hyperf\Validation\DatabasePresenceVerifierFactory::class,
                 \Chunhei2008\Hyperf\Validation\Contracts\Validation\Factory::class   => \Chunhei2008\Hyperf\Validation\ValidatorFactory::class,
-                \Hyperf\HttpServer\Server::class                                     => ServerFactory::class,
             ],
             'scan'         => [
                 'paths' => [
