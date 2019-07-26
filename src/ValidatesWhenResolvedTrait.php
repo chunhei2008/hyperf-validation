@@ -21,7 +21,7 @@ trait ValidatesWhenResolvedTrait
         }
 
         $instance = $this->getValidatorInstance();
-
+        
         if ($instance->fails()) {
             $this->failedValidation($instance);
         }
@@ -40,7 +40,7 @@ trait ValidatesWhenResolvedTrait
     /**
      * Get the validator instance for the request.
      *
-     * @return \Chunhei2008\Hyperf\Validation\Validator
+     * @return \Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator
      */
     protected function getValidatorInstance()
     {
@@ -50,7 +50,7 @@ trait ValidatesWhenResolvedTrait
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Chunhei2008\Hyperf\Validation\Validator  $validator
+     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator  $validator
      * @return void
      *
      * @throws \Chunhei2008\Hyperf\Validation\ValidationException

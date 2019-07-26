@@ -3,10 +3,11 @@
 namespace Chunhei2008\Hyperf\Validation;
 
 use Exception;
+use Hyperf\Server\Exception\ServerException;
 use Hyperf\Utils\Arr;
 use Chunhei2008\Hyperf\Support\Facades\Validator as ValidatorFacade;   // todo
 
-class ValidationException extends Exception
+class ValidationException extends ServerException
 {
     /**
      * The validator instance.
