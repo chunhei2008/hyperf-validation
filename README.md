@@ -1,6 +1,10 @@
 # Hyperf Validation
 
 
+## About
+
+chunhei2008/hyperf-validation 是对Laravel Validation的移植（不包含门面部分），具体使用方法可以参考Laravel Validation 的使用。
+
 ## Install
 
 ```
