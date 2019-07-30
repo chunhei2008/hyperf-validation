@@ -140,7 +140,7 @@ trait FormatsMessages
     protected function getWildcardCustomMessages($messages, $search, $default)
     {
         foreach ($messages as $key => $message) {
-            if ($search === $key || (Str::contains($key, ['*']) && Str::is($key, $search))) {
+            if ($search === $key || (Str::contains((string)$key, ['*']) && Str::is($key, $search))) {
                 return $message;
             }
         }
@@ -346,10 +346,10 @@ trait FormatsMessages
     /**
      * Call a custom validator message replacer.
      *
-     * @param  string                               $message
-     * @param  string                               $attribute
-     * @param  string                               $rule
-     * @param  array                                $parameters
+     * @param  string                                   $message
+     * @param  string                                   $attribute
+     * @param  string                                   $rule
+     * @param  array                                    $parameters
      * @param  \Chunhei2008\Hyperf\Validation\Validator $validator
      * @return string|null
      */
@@ -367,11 +367,11 @@ trait FormatsMessages
     /**
      * Call a class based validator message replacer.
      *
-     * @param  string                               $callback
-     * @param  string                               $message
-     * @param  string                               $attribute
-     * @param  string                               $rule
-     * @param  array                                $parameters
+     * @param  string                                   $callback
+     * @param  string                                   $message
+     * @param  string                                   $attribute
+     * @param  string                                   $rule
+     * @param  array                                    $parameters
      * @param  \Chunhei2008\Hyperf\Validation\Validator $validator
      * @return string
      */
@@ -379,6 +379,6 @@ trait FormatsMessages
     {
         [$class, $method] = Str::parseCallback($callback, 'replace');
 
-        return call_user_func_array([make($class), $method], array_slice(func_get_args(), 1));
+        return call_user_func_array([$this->container->make($class), $method], array_slice(func_get_args(), 1));
     }
 }

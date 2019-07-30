@@ -196,10 +196,10 @@ class Validator implements ValidatorContract
      * Create a new Validator instance.
      *
      * @param  \Chunhei2008\Hyperf\Translation\Contracts\Translator $translator
-     * @param  array                                            $data
-     * @param  array                                            $rules
-     * @param  array                                            $messages
-     * @param  array                                            $customAttributes
+     * @param  array                                                $data
+     * @param  array                                                $rules
+     * @param  array                                                $messages
+     * @param  array                                                $customAttributes
      * @return void
      */
     public function __construct(Translator $translator, array $data, array $rules,
@@ -232,7 +232,7 @@ class Validator implements ValidatorContract
             // If the data key contains a dot, we will replace it with another character
             // sequence so it doesn't interfere with dot processing when working with
             // array based validation rules and array_dot later in the validations.
-            if (Str::contains($key, '.')) {
+            if (Str::contains((string)$key, '.')) {
                 $newData[str_replace('.', '->', $key)] = $value;
             } else {
                 $newData[$key] = $value;
@@ -563,8 +563,8 @@ class Validator implements ValidatorContract
     /**
      * Validate an attribute using a custom rule object.
      *
-     * @param  string                                    $attribute
-     * @param  mixed                                     $value
+     * @param  string                                                   $attribute
+     * @param  mixed                                                    $value
      * @param  \Chunhei2008\Hyperf\Validation\Contracts\Validation\Rule $rule
      * @return void
      */
@@ -686,7 +686,7 @@ class Validator implements ValidatorContract
     /**
      * Get the message container for the validator.
      *
-     * @return \Chunhei2008\Hyperf\Support\MessageBag
+     * @return MessageBag
      */
     public function messages()
     {
@@ -700,7 +700,7 @@ class Validator implements ValidatorContract
     /**
      * An alternative more semantic shortcut to the message container.
      *
-     * @return \Chunhei2008\Hyperf\Support\MessageBag
+     * @return MessageBag
      */
     public function errors()
     {
@@ -710,7 +710,7 @@ class Validator implements ValidatorContract
     /**
      * Get the messages for the instance.
      *
-     * @return \Chunhei2008\Hyperf\Support\MessageBag
+     * @return MessageBag
      */
     public function getMessageBag()
     {
@@ -1069,7 +1069,6 @@ class Validator implements ValidatorContract
      *
      * @throws \RuntimeException
      *
-     * todo
      *
      */
     public function getPresenceVerifier()
@@ -1089,7 +1088,6 @@ class Validator implements ValidatorContract
      *
      * @throws \RuntimeException
      *
-     * todo
      *
      */
     public function getPresenceVerifierFor($connection)
@@ -1171,7 +1169,7 @@ class Validator implements ValidatorContract
     {
         [$class, $method] = Str::parseCallback($callback, 'validate');
 
-        return call_user_func_array([make($class), $method], $parameters);
+        return call_user_func_array([$this->container->make($class), $method], $parameters);
     }
 
     /**

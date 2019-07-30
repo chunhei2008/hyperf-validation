@@ -21,7 +21,7 @@ class ValidatorFactory
     {
         $translator = $container->get(Translator::class);
 
-        $validator = make(Factory::class, compact('translator'));
+        $validator = make(Factory::class, compact('translator','container'));
 
         if ($container->has(ConnectionResolverInterface::class) && $container->has(PresenceVerifierInterface::class)) {
             $presenceVerifier = $container->get(PresenceVerifierInterface::class);

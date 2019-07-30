@@ -3,8 +3,8 @@
 namespace Chunhei2008\Hyperf\Validation;
 
 use Closure;
+use Hyperf\Di\Container;
 use Hyperf\Utils\Str;
-//use Chunhei2008\Hyperf\Validation\Contracts\Container\Container;   // todo
 use Chunhei2008\Hyperf\Translation\Contracts\Translator;
 use Chunhei2008\Hyperf\Validation\Contracts\Validation\Factory as FactoryContract;
 
@@ -24,12 +24,12 @@ class Factory implements FactoryContract
      */
     protected $verifier;
 
-//    /**
-//     * The IoC container instance.
-//     *
-//     * @var \Chunhei2008\Hyperf\Validation\Contracts\Container\Container
-//     */
-//    protected $container;
+    /**
+     * The IoC container instance.
+     *
+     * @var Container
+     */
+    protected $container;
 
     /**
      * All of the custom validator extensions.
@@ -76,13 +76,13 @@ class Factory implements FactoryContract
     /**
      * Create a new Validator factory instance.
      *
-     * @param  \Chunhei2008\Hyperf\Translation\Contracts\Translator  $translator
-     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Container\Container|null  $container
+     * @param  \Chunhei2008\Hyperf\Translation\Contracts\Translator|null  $translator
+     * @param  Container
      * @return void
      */
-    public function __construct(Translator $translator)
+    public function __construct(Translator $translator,Container $container = null)
     {
-     //   $this->container = $container;
+        $this->container = $container;
         $this->translator = $translator;
     }
 
@@ -111,9 +111,9 @@ class Factory implements FactoryContract
         // Next we'll set the IoC container instance of the validator, which is used to
         // resolve out class based validator extensions. If it is not set then these
         // types of extensions will not be possible on these validation instances.
-//        if (! is_null($this->container)) {
-//            $validator->setContainer($this->container);
-//        }
+        if (! is_null($this->container)) {
+            $validator->setContainer($this->container);
+        }
 
         $this->addExtensions($validator);
 

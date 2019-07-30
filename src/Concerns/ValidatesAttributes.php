@@ -12,7 +12,7 @@ use Hyperf\Utils\Arr;
 use Hyperf\Utils\Str;
 use InvalidArgumentException;
 use Carbon\Carbon;
-use Chunhei2008\Hyperf\Support\Facades\Date;   //todo
+use Carbon\Carbon as Date;
 use Chunhei2008\Hyperf\Validation\Rules\Exists;
 use Chunhei2008\Hyperf\Validation\Rules\Unique;
 use Chunhei2008\Hyperf\Validation\ValidationData;
