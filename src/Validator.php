@@ -9,8 +9,7 @@ use Chunhei2008\Hyperf\Validation\Support\MessageBag;
 use Hyperf\Utils\Arr;
 use Hyperf\Utils\Str;
 use Hyperf\Utils\Fluent;
-
-//use Chunhei2008\Hyperf\Validation\Contracts\Container\Container;
+use Hyperf\Di\Container;
 use Chunhei2008\Hyperf\Translation\Contracts\Translator;
 use Chunhei2008\Hyperf\Validation\Contracts\Validation\ImplicitRule;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -29,12 +28,12 @@ class Validator implements ValidatorContract
      */
     protected $translator;
 
-//    /**
-//     * The container instance.
-//     *
-//     * @var \Chunhei2008\Hyperf\Validation\Contracts\Container\Container
-//     */
-//    protected $container;
+    /**
+     * The container instance.
+     *
+     * @var Container
+     */
+    protected $container;
 
     /**
      * The Presence Verifier implementation.
@@ -1132,16 +1131,16 @@ class Validator implements ValidatorContract
         $this->translator = $translator;
     }
 
-//    /**
-//     * Set the IoC container instance.
-//     *
-//     * @param  \Chunhei2008\Hyperf\Validation\Contracts\Container\Container  $container
-//     * @return void
-//     */
-//    public function setContainer(Container $container)
-//    {
-//        $this->container = $container;
-//    }
+    /**
+     * Set the IoC container instance.
+     *
+     * @param Container $container
+     * @return void
+     */
+    public function setContainer(Container $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * Call a custom validator extension.

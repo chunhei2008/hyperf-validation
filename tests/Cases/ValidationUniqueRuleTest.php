@@ -1,9 +1,9 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests;
+namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
 
 use PHPUnit\Framework\TestCase;
-use Illuminate\Database\Eloquent\Model;
+use Hyperf\Database\Model\Model;
 use Chunhei2008\Hyperf\Validation\Rules\Unique;
 
 class ValidationUniqueRuleTest extends TestCase

@@ -1,23 +1,19 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests;
+namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
 
 use PHPUnit\Framework\TestCase;
 
 
-use Illuminate\Validation\Validator;
-use Illuminate\Translation\Translator;
-use Illuminate\Translation\ArrayLoader;
-use Illuminate\Validation\Rules\Exists;
-use Illuminate\Database\Capsule\Manager as DB;
-use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Validation\DatabasePresenceVerifier;
 
+use Illuminate\Database\Capsule\Manager as DB;  //todo
 
 use Chunhei2008\Hyperf\Validation\Validator;
 use Chunhei2008\Hyperf\Translation\Translator;
 use Chunhei2008\Hyperf\Translation\ArrayLoader;
 use Chunhei2008\Hyperf\Validation\Rules\Exists;
+use Hyperf\Database\Model\Model as Eloquent;
+use Chunhei2008\Hyperf\Validation\DatabasePresenceVerifier;
 
 
 

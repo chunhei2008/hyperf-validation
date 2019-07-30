@@ -1,16 +1,15 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests;
+namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
 
 use DateTime;
+use Hyperf\Di\Definition\DefinitionSourceInterface;
 use Mockery as m;
 use DateTimeImmutable;
 use Hyperf\Utils\Arr;
 use InvalidArgumentException;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
-use Illuminate\Container\Container;
-
 use Hyperf\Di\Container;
 use Chunhei2008\Hyperf\Validation\Validator;
 use Chunhei2008\Hyperf\Translation\Translator;
@@ -51,7 +50,8 @@ class ValidationValidatorTest extends TestCase
     {
         $trans = $this->getIlluminateArrayTranslator();
         $v = new Validator($trans, ['foo' => 'bar', 'baz' => 'boom'], ['foo' => 'Same:baz']);
-        $v->setContainer(new Container);
+        $definitionSource =  m::mock(DefinitionSourceInterface::class);
+        $v->setContainer(new Container($definitionSource));
         $v->after(function ($validator) {
             $_SERVER['__validator.after.test'] = true;
 

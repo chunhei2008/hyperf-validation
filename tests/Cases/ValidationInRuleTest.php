@@ -1,11 +1,11 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests;
+namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
 
 use PHPUnit\Framework\TestCase;
 use Chunhei2008\Hyperf\Validation\Rule;
 use Chunhei2008\Hyperf\Validation\Rules\In;
-use Chunhei2008\Hyperf\Validation\Tests\fixtures\Values;
+use Chunhei2008\Hyperf\Validation\Tests\Cases\fixtures\Values;
 
 
 

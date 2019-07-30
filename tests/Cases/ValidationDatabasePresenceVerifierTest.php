@@ -1,16 +1,13 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests;
+namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
 
 use Closure;
 use stdClass;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Illuminate\Validation\DatabasePresenceVerifier;
-use Illuminate\Database\ConnectionResolverInterface;
-
 use Chunhei2008\Hyperf\Validation\DatabasePresenceVerifier;
-
+use Hyperf\Database\ConnectionResolverInterface;
 
 class ValidationDatabasePresenceVerifierTest extends TestCase
 {
