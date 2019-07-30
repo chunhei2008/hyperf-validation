@@ -14,7 +14,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "HyperfTest\\": "tests"
+            "Chunhei2008\\Hyperf\\Validation\\Tests\\": "tests"
         }
     },
     "require": {
