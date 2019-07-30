@@ -3,11 +3,11 @@
 namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
 
 use Hyperf\Database\Connection;
-use Hyperf\Database\ConnectionInterface;
 use Hyperf\Database\ConnectionResolverInterface;
 use Hyperf\Database\Model\Register;
 use Hyperf\Database\Schema\Builder;
 use Hyperf\Database\Schema\Grammars\MySqlGrammar;
+use Hyperf\DbConnection\ConnectionResolver;
 use Hyperf\Utils\ApplicationContext;
 use PHPUnit\Framework\TestCase;
 
@@ -34,7 +34,8 @@ class ValidationExistsRuleTest extends TestCase
      */
     protected function setUp(): void
     {
-        ApplicationContext::setContainer(m::mock(ContainerInterface::class));
+        ApplicationContext::setContainer($container = m::mock(ContainerInterface::class));
+     //   $container->
         $pdo        = new \PDO('sqlite::memory:');
         $connection = new Connection($pdo);
         $connection->setSchemaGrammar(new MySqlGrammar());
@@ -42,6 +43,8 @@ class ValidationExistsRuleTest extends TestCase
         $connectionResolver = new \Hyperf\Database\ConnectionResolver([
             'default' => $connection,
         ]);
+
+        $container->shouldReceive('get')->once()->with(ConnectionResolver::class)->andReturn($connectionResolver);
 
         Register::setConnectionResolver($connectionResolver);
 
