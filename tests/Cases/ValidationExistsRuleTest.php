@@ -12,11 +12,6 @@ use Hyperf\Di\Container;
 use Hyperf\Di\Definition\DefinitionSourceInterface;
 use Hyperf\Utils\ApplicationContext;
 use PHPUnit\Framework\TestCase;
-
-
-//use Illuminate\Database\Capsule\Manager as DB;  //todo
-
-//use Hyperf\DbConnection\Db as DB;
 use Chunhei2008\Hyperf\Validation\Validator;
 use Chunhei2008\Hyperf\Translation\Translator;
 use Chunhei2008\Hyperf\Translation\ArrayLoader;
