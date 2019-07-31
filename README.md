@@ -126,3 +126,9 @@ class IndexController extends Controller
 
 
 ```
+
+
+## 未完成
+
+* [ ] Auth  
+* [ ] ValidationExistsRuleTest 中的单测
