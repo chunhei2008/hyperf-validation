@@ -3,28 +3,22 @@
 namespace Chunhei2008\HyperfTest\Validation\Cases;
 
 use Hyperf\Database\Connection;
+use Hyperf\Database\ConnectionResolver;
 use Hyperf\Database\ConnectionResolverInterface;
 use Hyperf\Database\Model\Register;
 use Hyperf\Database\Schema\Builder;
 use Hyperf\Database\Schema\Grammars\MySqlGrammar;
-use Hyperf\DbConnection\ConnectionResolver;
-use Hyperf\Event\EventDispatcher;
+use Hyperf\Di\Container;
+use Hyperf\Di\Definition\DefinitionSourceInterface;
 use Hyperf\Utils\ApplicationContext;
 use PHPUnit\Framework\TestCase;
-
-
-//use Illuminate\Database\Capsule\Manager as DB;  //todo
-
-//use Hyperf\DbConnection\Db as DB;
 use Chunhei2008\Hyperf\Validation\Validator;
 use Chunhei2008\Hyperf\Translation\Translator;
 use Chunhei2008\Hyperf\Translation\ArrayLoader;
 use Chunhei2008\Hyperf\Validation\Rules\Exists;
 use Hyperf\DbConnection\Model\Model as Eloquent;
 use Chunhei2008\Hyperf\Validation\DatabasePresenceVerifier;
-use Psr\Container\ContainerInterface;
 use Mockery as m;
-use Psr\EventDispatcher\EventDispatcherInterface;
 
 
 class ValidationExistsRuleTest extends TestCase
@@ -36,22 +30,13 @@ class ValidationExistsRuleTest extends TestCase
      */
     protected function setUp(): void
     {
-//        ApplicationContext::setContainer($container = m::mock(ContainerInterface::class));
-//     //   $container->
-//        $pdo        = new \PDO('sqlite::memory:');
-//        $connection = new Connection($pdo);
-//        $connection->setSchemaGrammar(new MySqlGrammar());
-//
-//        $connectionResolver = new \Hyperf\Database\ConnectionResolver([
-//            'default' => $connection,
-//        ]);
-//
-//        $container->shouldReceive('get')->once()->with(ConnectionResolver::class)->andReturn($connectionResolver);
-//        $container->shouldReceive('get')->once()->with(EventDispatcherInterface::class)->andReturn($dispatchr = m::mock(EventDispatcher::class));
-//
-//        Register::setConnectionResolver($connectionResolver);
-//
-//        $this->createSchema();
+        ApplicationContext::setContainer(new Container(m::mock(DefinitionSourceInterface::class)));
+        $pdo = new \PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+        $connection = new Connection($pdo);
+        $connection->setSchemaGrammar(new MySqlGrammar());
+        Register::setConnectionResolver(new ConnectionResolver(['default' => $connection]));
+
+        $this->createSchema();
     }
 
     public function testItCorrectlyFormatsAStringVersionOfTheRule()
@@ -65,29 +50,29 @@ class ValidationExistsRuleTest extends TestCase
         $this->assertEquals('exists:table,column,foo,"bar"', (string)$rule);
     }
 
-//    public function testItChoosesValidRecordsUsingWhereInRule()
-//    {
-//        $rule = new Exists('users', 'id');
-//        $rule->whereIn('type', ['foo', 'bar']);
-//
-//        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
-//        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
-//        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
-//        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
-//
-//        $trans = $this->getIlluminateArrayTranslator();
-//        $v     = new Validator($trans, [], ['id' => $rule]);
-//        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
-//
-//        $v->setData(['id' => 1]);
-//        $this->assertTrue($v->passes());
-//        $v->setData(['id' => 2]);
-//        $this->assertTrue($v->passes());
-//        $v->setData(['id' => 3]);
-//        $this->assertFalse($v->passes());
-//        $v->setData(['id' => 4]);
-//        $this->assertFalse($v->passes());
-//    }
+    public function testItChoosesValidRecordsUsingWhereInRule()
+    {
+        $rule = new Exists('users', 'id');
+        $rule->whereIn('type', ['foo', 'bar']);
+
+        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
+        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
+        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
+        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
+
+        $trans = $this->getIlluminateArrayTranslator();
+        $v     = new Validator($trans, [], ['id' => $rule]);
+        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
+
+        $v->setData(['id' => 1]);
+        $this->assertTrue($v->passes());
+        $v->setData(['id' => 2]);
+        $this->assertTrue($v->passes());
+        $v->setData(['id' => 3]);
+        $this->assertFalse($v->passes());
+        $v->setData(['id' => 4]);
+        $this->assertFalse($v->passes());
+    }
 //
 //    public function testItChoosesValidRecordsUsingWhereNotInRule()
 //    {
