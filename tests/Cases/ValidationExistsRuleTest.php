@@ -50,29 +50,29 @@ class ValidationExistsRuleTest extends TestCase
         $this->assertEquals('exists:table,column,foo,"bar"', (string)$rule);
     }
 
-    public function testItChoosesValidRecordsUsingWhereInRule()
-    {
-        $rule = new Exists('users', 'id');
-        $rule->whereIn('type', ['foo', 'bar']);
-
-        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
-        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
-        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
-        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
-
-        $trans = $this->getIlluminateArrayTranslator();
-        $v     = new Validator($trans, [], ['id' => $rule]);
-        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
-
-        $v->setData(['id' => 1]);
-        $this->assertTrue($v->passes());
-        $v->setData(['id' => 2]);
-        $this->assertTrue($v->passes());
-        $v->setData(['id' => 3]);
-        $this->assertFalse($v->passes());
-        $v->setData(['id' => 4]);
-        $this->assertFalse($v->passes());
-    }
+//    public function testItChoosesValidRecordsUsingWhereInRule()
+//    {
+//        $rule = new Exists('users', 'id');
+//        $rule->whereIn('type', ['foo', 'bar']);
+//
+//        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
+//        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
+//        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
+//        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
+//
+//        $trans = $this->getIlluminateArrayTranslator();
+//        $v     = new Validator($trans, [], ['id' => $rule]);
+//        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
+//
+//        $v->setData(['id' => 1]);
+//        $this->assertTrue($v->passes());
+//        $v->setData(['id' => 2]);
+//        $this->assertTrue($v->passes());
+//        $v->setData(['id' => 3]);
+//        $this->assertFalse($v->passes());
+//        $v->setData(['id' => 4]);
+//        $this->assertFalse($v->passes());
+//    }
 //
 //    public function testItChoosesValidRecordsUsingWhereNotInRule()
 //    {

@@ -43,4 +43,4 @@ before_script:
 
 script:
   - composer analyze
-  - composer test
+  - composer test --dev
