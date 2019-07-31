@@ -1,6 +1,6 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
+namespace Chunhei2008\HyperfTest\Validation\Cases;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;

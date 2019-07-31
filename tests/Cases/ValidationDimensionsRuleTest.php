@@ -1,6 +1,6 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
+namespace Chunhei2008\HyperfTest\Validation\Cases;
 
 use Chunhei2008\Hyperf\Validation\Rule;
 use PHPUnit\Framework\TestCase;

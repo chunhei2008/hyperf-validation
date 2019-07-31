@@ -14,13 +14,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Chunhei2008\\Hyperf\\Validation\\Tests\\": "tests"
+            "Chunhei2008\\HyperfTest\\Validation\\": "tests"
         }
     },
     "require": {
         "php": ">=7.2",
         "ext-swoole": ">=4.3",
-        "chunhei2008/hyperf-translation": "dev-master",
+        "chunhei2008/hyperf-translation": "^1.0",
         "egulias/email-validator": "^2.1",
         "hyperf/command": "^1.0",
         "hyperf/database": "^1.0",

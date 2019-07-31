@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
+namespace Chunhei2008\HyperfTest\Validation\Cases;
 
 use PHPUnit\Framework\TestCase;
 

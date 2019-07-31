@@ -1,6 +1,6 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
+namespace Chunhei2008\HyperfTest\Validation\Cases;
 
 use Hyperf\Database\Connection;
 use Hyperf\Database\ConnectionResolverInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chunhei2008\Hyperf\Validation\Tests\Cases;
+namespace Chunhei2008\HyperfTest\Validation\Cases;
 
 use DateTime;
 use Hyperf\Di\Definition\DefinitionSourceInterface;
