@@ -2,10 +2,8 @@
 
 namespace Chunhei2008\Hyperf\Validation;
 
-use Exception;
 use Hyperf\Server\Exception\ServerException;
 use Hyperf\Utils\Arr;
-use Chunhei2008\Hyperf\Support\Facades\Validator as ValidatorFacade;   // todo
 
 class ValidationException extends ServerException
 {
@@ -69,7 +67,7 @@ class ValidationException extends ServerException
      */
     public static function withMessages(array $messages)
     {
-        return new static(tap(ValidatorFacade::make([], []), function ($validator) use ($messages) {
+        return new static(tap(Factory::make([], []), function ($validator) use ($messages) {
             foreach ($messages as $key => $value) {
                 foreach (Arr::wrap($value) as $message) {
                     $validator->errors()->add($key, $message);

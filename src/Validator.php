@@ -5,7 +5,6 @@ namespace Chunhei2008\Hyperf\Validation;
 use RuntimeException;
 use BadMethodCallException;
 use Chunhei2008\Hyperf\Validation\Support\MessageBag;
-
 use Hyperf\Utils\Arr;
 use Hyperf\Utils\Str;
 use Hyperf\Utils\Fluent;

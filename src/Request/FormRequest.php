@@ -12,17 +12,12 @@ namespace Chunhei2008\Hyperf\Validation\Request;
 
 use Chunhei2008\Hyperf\Validation\Contracts\Validation\Factory;
 use Hyperf\HttpServer\Request;
-
 //use Illuminate\Http\JsonResponse;
-
 //use Illuminate\Routing\Redirector;
-
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator;
 use Chunhei2008\Hyperf\Validation\ValidationException;
-
 //use Illuminate\Auth\Access\AuthorizationException;
-
 use Chunhei2008\Hyperf\Validation\Contracts\Validation\Factory as ValidationFactory;
 use Chunhei2008\Hyperf\Validation\Contracts\Validation\ValidatesWhenResolved;
 use Chunhei2008\Hyperf\Validation\ValidatesWhenResolvedTrait;
