@@ -38,14 +38,14 @@ class ValidationExistsRuleTest extends TestCase
         $container->shouldReceive('get')->with('db.connector.mysql')->andReturn(new MySqlConnector());
         $connector  = new ConnectionFactory($container);
         $dbConfig   = [
-            'driver'    => 'mysql',
-            'host'      => '127.0.0.1',
-            'database'  => 'hyperf',
-            'username'  => 'root',
-            'password'  => '123456',
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
+            'driver'    => env('DB_DRIVER', 'mysql'),
+            'host'      => env('DB_HOST', 'localhost'),
+            'database'  => env('DB_DATABASE', 'hyperf'),
+            'username'  => env('DB_USERNAME', 'root'),
+            'password'  => env('DB_PASSWORD', ''),
+            'charset'   => env('DB_CHARSET', 'utf8'),
+            'collation' => env('DB_COLLATION', 'utf8_unicode_ci'),
+            'prefix'    => env('DB_PREFIX', ''),
         ];
         $connection = $connector->make($dbConfig);
         $resolver   = new ConnectionResolver(['default' => $connection]);
