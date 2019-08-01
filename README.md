@@ -126,8 +126,3 @@ class IndexController extends Controller
 
 
 ```
-
-
-## 未完成
-
-* [ ] ValidationExistsRuleTest test cases
