@@ -4,12 +4,13 @@ namespace Chunhei2008\HyperfTest\Validation\Cases;
 
 use Hyperf\Database\Connection;
 use Hyperf\Database\ConnectionResolver;
+use Hyperf\DbConnection\ConnectionResolver as DBConnectionResolver;
 use Hyperf\Database\ConnectionResolverInterface;
+use Hyperf\Database\Connectors\ConnectionFactory;
+use Hyperf\Database\Connectors\MySqlConnector;
 use Hyperf\Database\Model\Register;
 use Hyperf\Database\Schema\Builder;
-use Hyperf\Database\Schema\Grammars\MySqlGrammar;
-use Hyperf\Di\Container;
-use Hyperf\Di\Definition\DefinitionSourceInterface;
+use Hyperf\Server\Entry\EventDispatcher;
 use Hyperf\Utils\ApplicationContext;
 use PHPUnit\Framework\TestCase;
 use Chunhei2008\Hyperf\Validation\Validator;
@@ -19,6 +20,8 @@ use Chunhei2008\Hyperf\Validation\Rules\Exists;
 use Hyperf\DbConnection\Model\Model as Eloquent;
 use Chunhei2008\Hyperf\Validation\DatabasePresenceVerifier;
 use Mockery as m;
+use Psr\Container\ContainerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 
 class ValidationExistsRuleTest extends TestCase
@@ -30,11 +33,26 @@ class ValidationExistsRuleTest extends TestCase
      */
     protected function setUp(): void
     {
-        ApplicationContext::setContainer(new Container(m::mock(DefinitionSourceInterface::class)));
-        $pdo = new \PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
-        $connection = new Connection($pdo);
-        $connection->setSchemaGrammar(new MySqlGrammar());
-        Register::setConnectionResolver(new ConnectionResolver(['default' => $connection]));
+        $container = m::mock(ContainerInterface::class);
+        $container->shouldReceive('has')->andReturn(true);
+        $container->shouldReceive('get')->with('db.connector.mysql')->andReturn(new MySqlConnector());
+        $connector  = new ConnectionFactory($container);
+        $dbConfig   = [
+            'driver'    => 'mysql',
+            'host'      => '127.0.0.1',
+            'database'  => 'hyperf',
+            'username'  => 'root',
+            'password'  => '123456',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ];
+        $connection = $connector->make($dbConfig);
+        $resolver   = new ConnectionResolver(['default' => $connection]);
+        $container->shouldReceive('get')->with(DBConnectionResolver::class)->andReturn($resolver);
+        ApplicationContext::setContainer($container);
+        Register::setConnectionResolver($resolver);
+        $container->shouldReceive('get')->with(EventDispatcherInterface::class)->andReturn(new EventDispatcher());
 
         $this->createSchema();
     }
@@ -50,77 +68,77 @@ class ValidationExistsRuleTest extends TestCase
         $this->assertEquals('exists:table,column,foo,"bar"', (string)$rule);
     }
 
-//    public function testItChoosesValidRecordsUsingWhereInRule()
-//    {
-//        $rule = new Exists('users', 'id');
-//        $rule->whereIn('type', ['foo', 'bar']);
-//
-//        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
-//        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
-//        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
-//        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
-//
-//        $trans = $this->getIlluminateArrayTranslator();
-//        $v     = new Validator($trans, [], ['id' => $rule]);
-//        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
-//
-//        $v->setData(['id' => 1]);
-//        $this->assertTrue($v->passes());
-//        $v->setData(['id' => 2]);
-//        $this->assertTrue($v->passes());
-//        $v->setData(['id' => 3]);
-//        $this->assertFalse($v->passes());
-//        $v->setData(['id' => 4]);
-//        $this->assertFalse($v->passes());
-//    }
-//
-//    public function testItChoosesValidRecordsUsingWhereNotInRule()
-//    {
-//        $rule = new Exists('users', 'id');
-//        $rule->whereNotIn('type', ['foo', 'bar']);
-//
-//        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
-//        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
-//        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
-//        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
-//
-//        $trans = $this->getIlluminateArrayTranslator();
-//        $v     = new Validator($trans, [], ['id' => $rule]);
-//        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
-//
-//        $v->setData(['id' => 1]);
-//        $this->assertFalse($v->passes());
-//        $v->setData(['id' => 2]);
-//        $this->assertFalse($v->passes());
-//        $v->setData(['id' => 3]);
-//        $this->assertTrue($v->passes());
-//        $v->setData(['id' => 4]);
-//        $this->assertTrue($v->passes());
-//    }
-//
-//    public function testItChoosesValidRecordsUsingWhereNotInAndWhereNotInRulesTogether()
-//    {
-//        $rule = new Exists('users', 'id');
-//        $rule->whereIn('type', ['foo', 'bar', 'baz'])->whereNotIn('type', ['foo', 'bar']);
-//
-//        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
-//        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
-//        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
-//        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
-//
-//        $trans = $this->getIlluminateArrayTranslator();
-//        $v     = new Validator($trans, [], ['id' => $rule]);
-//        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
-//
-//        $v->setData(['id' => 1]);
-//        $this->assertFalse($v->passes());
-//        $v->setData(['id' => 2]);
-//        $this->assertFalse($v->passes());
-//        $v->setData(['id' => 3]);
-//        $this->assertTrue($v->passes());
-//        $v->setData(['id' => 4]);
-//        $this->assertFalse($v->passes());
-//    }
+    public function testItChoosesValidRecordsUsingWhereInRule()
+    {
+        $rule = new Exists('users', 'id');
+        $rule->whereIn('type', ['foo', 'bar']);
+
+        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
+        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
+        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
+        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
+
+        $trans = $this->getIlluminateArrayTranslator();
+        $v     = new Validator($trans, [], ['id' => $rule]);
+        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
+
+        $v->setData(['id' => 1]);
+        $this->assertTrue($v->passes());
+        $v->setData(['id' => 2]);
+        $this->assertTrue($v->passes());
+        $v->setData(['id' => 3]);
+        $this->assertFalse($v->passes());
+        $v->setData(['id' => 4]);
+        $this->assertFalse($v->passes());
+    }
+
+    public function testItChoosesValidRecordsUsingWhereNotInRule()
+    {
+        $rule = new Exists('users', 'id');
+        $rule->whereNotIn('type', ['foo', 'bar']);
+
+        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
+        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
+        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
+        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
+
+        $trans = $this->getIlluminateArrayTranslator();
+        $v     = new Validator($trans, [], ['id' => $rule]);
+        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
+
+        $v->setData(['id' => 1]);
+        $this->assertFalse($v->passes());
+        $v->setData(['id' => 2]);
+        $this->assertFalse($v->passes());
+        $v->setData(['id' => 3]);
+        $this->assertTrue($v->passes());
+        $v->setData(['id' => 4]);
+        $this->assertTrue($v->passes());
+    }
+
+    public function testItChoosesValidRecordsUsingWhereNotInAndWhereNotInRulesTogether()
+    {
+        $rule = new Exists('users', 'id');
+        $rule->whereIn('type', ['foo', 'bar', 'baz'])->whereNotIn('type', ['foo', 'bar']);
+
+        EloquentTestUser::create(['id' => '1', 'type' => 'foo']);
+        EloquentTestUser::create(['id' => '2', 'type' => 'bar']);
+        EloquentTestUser::create(['id' => '3', 'type' => 'baz']);
+        EloquentTestUser::create(['id' => '4', 'type' => 'other']);
+
+        $trans = $this->getIlluminateArrayTranslator();
+        $v     = new Validator($trans, [], ['id' => $rule]);
+        $v->setPresenceVerifier(new DatabasePresenceVerifier(Register::getConnectionResolver()));
+
+        $v->setData(['id' => 1]);
+        $this->assertFalse($v->passes());
+        $v->setData(['id' => 2]);
+        $this->assertFalse($v->passes());
+        $v->setData(['id' => 3]);
+        $this->assertTrue($v->passes());
+        $v->setData(['id' => 4]);
+        $this->assertFalse($v->passes());
+    }
 
     protected function createSchema()
     {
