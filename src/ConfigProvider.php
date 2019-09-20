@@ -19,7 +19,6 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
-                \Chunhei2008\Hyperf\Validation\Contracts\Validation\Validator::class => \Chunhei2008\Hyperf\Validation\ValidatorFactory::class,
                 \Chunhei2008\Hyperf\Validation\PresenceVerifierInterface::class      => \Chunhei2008\Hyperf\Validation\DatabasePresenceVerifierFactory::class,
                 \Chunhei2008\Hyperf\Validation\Contracts\Validation\Factory::class   => \Chunhei2008\Hyperf\Validation\ValidatorFactory::class,
             ],

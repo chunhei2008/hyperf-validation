@@ -3,7 +3,8 @@
 
 ## About
 
-chunhei2008/hyperf-validation 是对Laravel Validation的移植（不包含门面部分），具体使用方法可以参考Laravel Validation 的使用。
+chunhei2008/hyperf-validation 是对Laravel Validation的移植（不包含门面部分），具体使用方法可以参考Laravel Validation 的使用。已不再维护，推荐使用Hyperf官方组件
+
 
 ## Install
 
